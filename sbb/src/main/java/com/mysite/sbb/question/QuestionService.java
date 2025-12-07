@@ -6,6 +6,7 @@ import org.springframework.boot.context.config.ConfigDataLocationNotFoundExcepti
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,5 +26,13 @@ public class QuestionService {
         } else{
             throw new DataNotFoundException("Question not found");
         }
+    }
+
+    public void create(String subject, String content){
+        Question question = new Question();
+        question.setSubject(subject);
+        question.setContent(content);
+        question.setCreateDate(LocalDateTime.now());
+        this.questionRepository.save(question);
     }
 }
